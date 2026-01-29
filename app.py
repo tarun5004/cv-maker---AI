@@ -37,6 +37,434 @@ st.set_page_config(
 
 
 # =============================================================================
+# CUSTOM STYLING - Editorial Document Aesthetic
+# =============================================================================
+
+def inject_custom_css():
+    """
+    Inject custom CSS for a distinctive, refined aesthetic.
+    
+    Design Direction: Editorial/Magazine meets Luxury Stationery
+    - Warm cream and amber tones (not cold blues)
+    - Playfair Display for headings, DM Sans for body
+    - Subtle paper texture and elegant shadows
+    - Purposeful animations and transitions
+    """
+    st.markdown("""
+    <style>
+    /* =========================================================================
+       FONTS - Import distinctive typefaces
+       ========================================================================= */
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+    
+    /* =========================================================================
+       CSS VARIABLES - Warm, refined color palette
+       ========================================================================= */
+    :root {
+        --color-cream: #FAF7F2;
+        --color-cream-dark: #F0EBE3;
+        --color-amber: #C4956A;
+        --color-amber-light: #E8D5C4;
+        --color-amber-dark: #A67C52;
+        --color-charcoal: #2C2C2C;
+        --color-charcoal-light: #4A4A4A;
+        --color-ink: #1A1A1A;
+        --color-success: #5B8A72;
+        --color-warning: #C9A227;
+        --color-error: #B85450;
+        --color-muted: #8B8680;
+        
+        --font-display: 'Playfair Display', Georgia, serif;
+        --font-body: 'DM Sans', -apple-system, sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
+        
+        --shadow-soft: 0 2px 8px rgba(44, 44, 44, 0.06);
+        --shadow-medium: 0 4px 16px rgba(44, 44, 44, 0.08);
+        --shadow-lifted: 0 8px 32px rgba(44, 44, 44, 0.12);
+        
+        --radius-sm: 6px;
+        --radius-md: 10px;
+        --radius-lg: 16px;
+        
+        --transition-fast: 0.15s ease;
+        --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* =========================================================================
+       FORCE LIGHT THEME - Override any dark theme settings
+       ========================================================================= */
+    html, body, [data-testid="stAppViewContainer"], 
+    [data-testid="stHeader"], [data-testid="stToolbar"] {
+        background-color: #FAF7F2 !important;
+        color: #2C2C2C !important;
+    }
+    
+    /* =========================================================================
+       BASE STYLES - Paper-like background with subtle texture
+       ========================================================================= */
+    .stApp {
+        background: #FAF7F2 !important;
+        background-image: 
+            radial-gradient(ellipse at 100% 0%, rgba(196, 149, 106, 0.08) 0%, transparent 50%),
+            radial-gradient(ellipse at 0% 100%, rgba(196, 149, 106, 0.05) 0%, transparent 50%) !important;
+    }
+    
+    /* Subtle paper grain texture overlay */
+    .stApp::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.03;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    }
+    
+    /* =========================================================================
+       TYPOGRAPHY - Refined hierarchy
+       ========================================================================= */
+    .stApp, .stApp p, .stApp span, .stApp div,
+    .stApp label, .stApp .stMarkdown, .stApp [data-testid="stMarkdownContainer"] {
+        font-family: var(--font-body) !important;
+        color: #2C2C2C !important;
+    }
+    
+    /* Force all text to dark color */
+    .stApp * {
+        color: #2C2C2C;
+    }
+    
+    h1, h2, h3, .stApp h1, .stApp h2, .stApp h3 {
+        font-family: var(--font-display) !important;
+        color: #1A1A1A !important;
+        font-weight: 600 !important;
+        letter-spacing: -0.02em;
+    }
+    
+    h1 { font-size: 2.5rem !important; }
+    h2 { font-size: 1.75rem !important; }
+    h3 { font-size: 1.25rem !important; }
+    
+    /* Input text color */
+    .stTextInput input, .stTextArea textarea {
+        color: #2C2C2C !important;
+    }
+    
+    /* Placeholder text */
+    .stTextInput input::placeholder, .stTextArea textarea::placeholder {
+        color: #8B8680 !important;
+    }
+    
+    /* =========================================================================
+       SIDEBAR - Elegant navigation panel
+       ========================================================================= */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, var(--color-cream-dark) 0%, var(--color-cream) 100%) !important;
+        border-right: 1px solid var(--color-amber-light) !important;
+    }
+    
+    [data-testid="stSidebar"] .stMarkdown h1,
+    [data-testid="stSidebar"] .stMarkdown h2,
+    [data-testid="stSidebar"] .stMarkdown h3 {
+        font-family: var(--font-display) !important;
+        color: var(--color-ink) !important;
+    }
+    
+    /* Sidebar title styling */
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h1 {
+        font-size: 1.5rem !important;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--color-amber);
+        margin-bottom: 1rem;
+    }
+    
+    /* =========================================================================
+       BUTTONS - Refined, tactile appearance
+       ========================================================================= */
+    .stButton > button {
+        font-family: var(--font-body) !important;
+        font-weight: 600 !important;
+        border-radius: var(--radius-md) !important;
+        border: 1px solid var(--color-amber-light) !important;
+        background: white !important;
+        color: var(--color-charcoal) !important;
+        box-shadow: var(--shadow-soft) !important;
+        transition: all var(--transition-smooth) !important;
+        padding: 0.5rem 1.25rem !important;
+    }
+    
+    .stButton > button:hover {
+        background: var(--color-cream-dark) !important;
+        border-color: var(--color-amber) !important;
+        box-shadow: var(--shadow-medium) !important;
+        transform: translateY(-1px);
+    }
+    
+    /* Primary button - amber accent */
+    .stButton > button[kind="primary"],
+    .stButton > button[data-testid="baseButton-primary"] {
+        background: linear-gradient(135deg, var(--color-amber) 0%, var(--color-amber-dark) 100%) !important;
+        border: none !important;
+        color: white !important;
+    }
+    
+    .stButton > button[kind="primary"]:hover,
+    .stButton > button[data-testid="baseButton-primary"]:hover {
+        background: linear-gradient(135deg, var(--color-amber-dark) 0%, var(--color-amber) 100%) !important;
+        box-shadow: var(--shadow-lifted) !important;
+    }
+    
+    /* =========================================================================
+       INPUT FIELDS - Clean, paper-like inputs
+       ========================================================================= */
+    .stTextInput > div > div > input,
+    .stTextArea > div > div > textarea,
+    .stSelectbox > div > div > div {
+        font-family: var(--font-body) !important;
+        background: white !important;
+        border: 1px solid #E8D5C4 !important;
+        border-radius: var(--radius-md) !important;
+        box-shadow: var(--shadow-soft) !important;
+        color: #2C2C2C !important;
+        transition: all var(--transition-fast) !important;
+    }
+    
+    .stTextInput > div > div > input:focus,
+    .stTextArea > div > div > textarea:focus {
+        border-color: var(--color-amber) !important;
+        box-shadow: 0 0 0 3px rgba(196, 149, 106, 0.15) !important;
+    }
+    
+    /* Input labels */
+    .stTextInput label,
+    .stTextArea label,
+    .stSelectbox label {
+        font-family: var(--font-body) !important;
+        font-weight: 600 !important;
+        color: var(--color-charcoal) !important;
+        font-size: 0.875rem !important;
+    }
+    
+    /* =========================================================================
+       EXPANDERS - Card-like sections
+       ========================================================================= */
+    .streamlit-expanderHeader {
+        font-family: var(--font-body) !important;
+        font-weight: 600 !important;
+        background: white !important;
+        border: 1px solid var(--color-amber-light) !important;
+        border-radius: var(--radius-md) !important;
+        box-shadow: var(--shadow-soft) !important;
+        transition: all var(--transition-smooth) !important;
+    }
+    
+    .streamlit-expanderHeader:hover {
+        border-color: var(--color-amber) !important;
+        box-shadow: var(--shadow-medium) !important;
+    }
+    
+    .streamlit-expanderContent {
+        background: white !important;
+        border: 1px solid var(--color-amber-light) !important;
+        border-top: none !important;
+        border-radius: 0 0 var(--radius-md) var(--radius-md) !important;
+    }
+    
+    /* =========================================================================
+       METRICS - Refined data display
+       ========================================================================= */
+    [data-testid="stMetric"] {
+        background: white !important;
+        padding: 1rem !important;
+        border-radius: var(--radius-md) !important;
+        border: 1px solid var(--color-amber-light) !important;
+        box-shadow: var(--shadow-soft) !important;
+    }
+    
+    [data-testid="stMetricLabel"] {
+        font-family: var(--font-body) !important;
+        font-weight: 600 !important;
+        color: var(--color-muted) !important;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-size: 0.75rem !important;
+    }
+    
+    [data-testid="stMetricValue"] {
+        font-family: var(--font-display) !important;
+        color: var(--color-ink) !important;
+    }
+    
+    /* =========================================================================
+       ALERTS - Warm, contextual messaging
+       ========================================================================= */
+    .stAlert {
+        border-radius: var(--radius-md) !important;
+        border: none !important;
+    }
+    
+    [data-testid="stAlert"][data-baseweb="notification"]:has(div[role="alert"]) {
+        background: rgba(196, 149, 106, 0.1) !important;
+        border-left: 4px solid var(--color-amber) !important;
+    }
+    
+    /* Success alerts */
+    .element-container:has(.stSuccess) .stAlert {
+        background: rgba(91, 138, 114, 0.1) !important;
+        border-left: 4px solid var(--color-success) !important;
+    }
+    
+    /* Warning alerts */
+    .element-container:has(.stWarning) .stAlert {
+        background: rgba(201, 162, 39, 0.1) !important;
+        border-left: 4px solid var(--color-warning) !important;
+    }
+    
+    /* Error alerts */
+    .element-container:has(.stError) .stAlert {
+        background: rgba(184, 84, 80, 0.1) !important;
+        border-left: 4px solid var(--color-error) !important;
+    }
+    
+    /* =========================================================================
+       PROGRESS BAR - Amber accent
+       ========================================================================= */
+    .stProgress > div > div > div {
+        background: linear-gradient(90deg, var(--color-amber) 0%, var(--color-amber-dark) 100%) !important;
+        border-radius: 999px !important;
+    }
+    
+    .stProgress > div > div {
+        background: var(--color-cream-dark) !important;
+        border-radius: 999px !important;
+    }
+    
+    /* =========================================================================
+       MARKDOWN - Refined content styling
+       ========================================================================= */
+    .stMarkdown code {
+        font-family: var(--font-mono) !important;
+        background: var(--color-cream-dark) !important;
+        padding: 0.15rem 0.4rem !important;
+        border-radius: var(--radius-sm) !important;
+        font-size: 0.875em !important;
+        color: var(--color-amber-dark) !important;
+    }
+    
+    .stMarkdown a {
+        color: var(--color-amber-dark) !important;
+        text-decoration: none !important;
+        border-bottom: 1px solid var(--color-amber-light);
+        transition: all var(--transition-fast);
+    }
+    
+    .stMarkdown a:hover {
+        color: var(--color-amber) !important;
+        border-bottom-color: var(--color-amber);
+    }
+    
+    /* Horizontal rules */
+    .stMarkdown hr {
+        border: none !important;
+        height: 1px !important;
+        background: linear-gradient(90deg, transparent, var(--color-amber-light), transparent) !important;
+        margin: 2rem 0 !important;
+    }
+    
+    /* =========================================================================
+       TABS - Clean tab navigation
+       ========================================================================= */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 0.5rem;
+        background: transparent !important;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        font-family: var(--font-body) !important;
+        font-weight: 600 !important;
+        background: white !important;
+        border: 1px solid var(--color-amber-light) !important;
+        border-radius: var(--radius-md) !important;
+        color: var(--color-charcoal) !important;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background: var(--color-amber) !important;
+        border-color: var(--color-amber) !important;
+        color: white !important;
+    }
+    
+    /* =========================================================================
+       CHECKBOX & RADIO - Refined controls
+       ========================================================================= */
+    .stCheckbox label span,
+    .stRadio label span {
+        font-family: var(--font-body) !important;
+    }
+    
+    /* =========================================================================
+       CAPTION - Muted helper text
+       ========================================================================= */
+    .stCaption, [data-testid="stCaptionContainer"] {
+        font-family: var(--font-body) !important;
+        color: var(--color-muted) !important;
+        font-size: 0.8rem !important;
+    }
+    
+    /* =========================================================================
+       ANIMATIONS - Smooth page transitions
+       ========================================================================= */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .main .block-container {
+        animation: fadeInUp 0.4s ease-out;
+    }
+    
+    /* =========================================================================
+       SCROLLBAR - Refined, minimal
+       ========================================================================= */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: var(--color-cream);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: var(--color-amber-light);
+        border-radius: 999px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-amber);
+    }
+    
+    /* =========================================================================
+       RESPONSIVE ADJUSTMENTS
+       ========================================================================= */
+    @media (max-width: 768px) {
+        h1 { font-size: 2rem !important; }
+        h2 { font-size: 1.5rem !important; }
+        h3 { font-size: 1.1rem !important; }
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+
+# =============================================================================
 # SECTION DEFINITIONS
 # =============================================================================
 
@@ -50,6 +478,138 @@ SECTIONS = {
     "projects": {"icon": "🚀", "label": "Projects", "description": "Personal & Professional Projects"},
     "optimize": {"icon": "🎯", "label": "Optimize for Job", "description": "Match to Job Description"},
 }
+
+
+# =============================================================================
+# UI COMPONENT HELPERS
+# =============================================================================
+
+def render_styled_card(title: str, content: str, accent: bool = False) -> None:
+    """
+    Render a styled card component with editorial aesthetic.
+    
+    Args:
+        title: Card title text
+        content: Card content (can be HTML)
+        accent: Whether to use amber accent styling
+    """
+    border_color = "#C4956A" if accent else "#E8D5C4"
+    bg_color = "rgba(196, 149, 106, 0.05)" if accent else "white"
+    
+    st.markdown(f"""
+    <div style="
+        background: {bg_color};
+        border: 1px solid {border_color};
+        border-radius: 10px;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 8px rgba(44, 44, 44, 0.06);
+    ">
+        <div style="
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #4A4A4A;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        ">{title}</div>
+        <div style="
+            font-family: 'DM Sans', sans-serif;
+            color: #2C2C2C;
+            line-height: 1.5;
+        ">{content}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+def render_skill_badge(skill: str, category: str = "") -> str:
+    """
+    Return HTML for a styled skill badge.
+    
+    Args:
+        skill: The skill text
+        category: Optional category for color coding
+    
+    Returns:
+        HTML string for the badge
+    """
+    return f"""
+    <span style="
+        display: inline-block;
+        background: linear-gradient(135deg, #FAF7F2, #F0EBE3);
+        border: 1px solid #E8D5C4;
+        border-radius: 6px;
+        padding: 0.35rem 0.75rem;
+        margin: 0.25rem;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.85rem;
+        color: #4A4A4A;
+        box-shadow: 0 1px 3px rgba(44, 44, 44, 0.04);
+    ">{skill}</span>
+    """
+
+
+def render_match_indicator(score: int) -> None:
+    """
+    Render a visual match score indicator.
+    
+    Args:
+        score: Match percentage (0-100)
+    """
+    # Determine color based on score
+    if score >= 70:
+        color = "#5B8A72"  # Success green
+        label = "Strong Match"
+    elif score >= 40:
+        color = "#C9A227"  # Warning amber
+        label = "Moderate Match"
+    else:
+        color = "#B85450"  # Error red
+        label = "Needs Work"
+    
+    st.markdown(f"""
+    <div style="
+        background: white;
+        border: 1px solid #E8D5C4;
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 4px 16px rgba(44, 44, 44, 0.08);
+    ">
+        <div style="
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: {color};
+            line-height: 1;
+        ">{score}%</div>
+        <div style="
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            color: #8B8680;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.5rem;
+        ">{label}</div>
+        <div style="
+            width: 100%;
+            height: 6px;
+            background: #F0EBE3;
+            border-radius: 3px;
+            margin-top: 1rem;
+            overflow: hidden;
+        ">
+            <div style="
+                width: {score}%;
+                height: 100%;
+                background: {color};
+                border-radius: 3px;
+                transition: width 0.5s ease;
+            "></div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 
 # =============================================================================
@@ -138,7 +698,27 @@ def render_sidebar():
     The main area then renders the appropriate editor.
     """
     with st.sidebar:
-        st.title("📄 CV Tailor")
+        # Brand header with elegant styling
+        st.markdown("""
+        <div style="text-align: center; padding: 1rem 0 0.5rem 0;">
+            <div style="
+                font-family: 'Playfair Display', Georgia, serif;
+                font-size: 1.6rem;
+                font-weight: 600;
+                color: #1A1A1A;
+                letter-spacing: -0.02em;
+            ">Smart CV Tailor</div>
+            <div style="
+                font-family: 'DM Sans', sans-serif;
+                font-size: 0.75rem;
+                color: #8B8680;
+                text-transform: uppercase;
+                letter-spacing: 0.15em;
+                margin-top: 0.25rem;
+            ">Craft Your Story</div>
+        </div>
+        """, unsafe_allow_html=True)
+        
         st.markdown("---")
         
         st.markdown("### Sections")
@@ -252,15 +832,37 @@ def render_main_area():
     current = st.session_state.current_section
     section_info = SECTIONS.get(current, {})
 
-    # Section header
+    # Section header with editorial styling
     if current != "preview":
         icon = section_info.get("icon", "📄")
         label = section_info.get("label", "Section")
         description = section_info.get("description", "")
         
-        st.header(f"{icon} {label}")
-        st.caption(description)
-        st.markdown("---")
+        # Editorial-style section header
+        st.markdown(f"""
+        <div style="margin-bottom: 1.5rem;">
+            <div style="
+                font-family: 'Playfair Display', Georgia, serif;
+                font-size: 2.25rem;
+                font-weight: 600;
+                color: #1A1A1A;
+                letter-spacing: -0.02em;
+                margin-bottom: 0.25rem;
+            ">{icon} {label}</div>
+            <div style="
+                font-family: 'DM Sans', sans-serif;
+                font-size: 0.95rem;
+                color: #8B8680;
+            ">{description}</div>
+            <div style="
+                width: 60px;
+                height: 3px;
+                background: linear-gradient(90deg, #C4956A, #E8D5C4);
+                border-radius: 2px;
+                margin-top: 0.75rem;
+            "></div>
+        </div>
+        """, unsafe_allow_html=True)
 
     # Route to appropriate editor
     if current == "header":
@@ -1117,10 +1719,19 @@ def render_optimize_placeholder():
     - Honest language (no hype like "AI-powered")
     - Clear distinction between matched and missing skills
     """
+    # Editorial intro text
     st.markdown("""
-    Paste a job description below to analyze how well your resume matches.
-    This analysis is **read-only** — it won't modify your resume.
-    """)
+    <div style="
+        font-family: 'DM Sans', sans-serif;
+        font-size: 1rem;
+        color: #4A4A4A;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    ">
+        Paste a job description below to analyze how well your resume matches. 
+        This analysis is <strong>read-only</strong> — it won't modify your resume.
+    </div>
+    """, unsafe_allow_html=True)
 
     # -------------------------------------------------------------------------
     # Job Description Input
@@ -1137,7 +1748,7 @@ def render_optimize_placeholder():
     col1, col2 = st.columns([1, 3])
     with col1:
         analyze_clicked = st.button(
-            "🔍 Analyze Job Description",
+            "🔍 Analyze Match",
             use_container_width=True,
             type="primary",
             disabled=(not st.session_state.job_description.strip()),
@@ -1156,7 +1767,7 @@ def render_optimize_placeholder():
         )
         st.rerun()
 
-    st.markdown("---")
+    st.markdown("<div style='height: 1.5rem;'></div>", unsafe_allow_html=True)
 
     # -------------------------------------------------------------------------
     # Analysis Results
@@ -1164,7 +1775,29 @@ def render_optimize_placeholder():
     if st.session_state.jd_analysis:
         render_analysis_results(st.session_state.jd_analysis)
     else:
-        st.info("📝 Paste a job description above and click 'Analyze' to see how your resume matches.")
+        # Empty state with editorial styling
+        st.markdown("""
+        <div style="
+            background: white;
+            border: 1px dashed #E8D5C4;
+            border-radius: 12px;
+            padding: 3rem;
+            text-align: center;
+        ">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📋</div>
+            <div style="
+                font-family: 'Playfair Display', Georgia, serif;
+                font-size: 1.25rem;
+                color: #2C2C2C;
+                margin-bottom: 0.5rem;
+            ">Ready to Analyze</div>
+            <div style="
+                font-family: 'DM Sans', sans-serif;
+                font-size: 0.9rem;
+                color: #8B8680;
+            ">Paste a job description above and click 'Analyze Match' to see how your resume compares.</div>
+        </div>
+        """, unsafe_allow_html=True)
 
     # Navigation
     render_section_nav(None, "projects")
@@ -1411,65 +2044,172 @@ def render_analysis_results(analysis: dict):
     4. Section Suggestions (where to improve)
     """
     # -------------------------------------------------------------------------
-    # Match Score
+    # Match Score - Using styled component
     # -------------------------------------------------------------------------
     match_score = analysis.get("match_score", 0)
     
-    st.markdown("### Analysis Results")
+    st.markdown("""
+    <div style="
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.5rem;
+        color: #1A1A1A;
+        margin-bottom: 1rem;
+    ">Analysis Results</div>
+    """, unsafe_allow_html=True)
     
-    # Score with appropriate messaging
-    col1, col2 = st.columns([1, 3])
+    # Score with styled indicator
+    col1, col2 = st.columns([1, 2])
     with col1:
-        st.metric("Match Score", f"{match_score}%")
+        render_match_indicator(match_score)
     with col2:
         if match_score >= 70:
-            st.success("✅ Good match! Your resume aligns well with this job.")
+            msg_color = "#5B8A72"
+            msg_icon = "✓"
+            msg_text = "Good match! Your resume aligns well with this job."
         elif match_score >= 40:
-            st.warning("⚠️ Moderate match. Consider adding more relevant skills.")
+            msg_color = "#C9A227"
+            msg_icon = "!"
+            msg_text = "Moderate match. Consider adding more relevant skills."
         else:
-            st.error("🟡 Low match. This job may require skills you haven't listed.")
+            msg_color = "#B85450"
+            msg_icon = "○"
+            msg_text = "Low match. This job may require skills you haven't listed."
+        
+        st.markdown(f"""
+        <div style="
+            background: white;
+            border-left: 4px solid {msg_color};
+            border-radius: 0 10px 10px 0;
+            padding: 1.5rem;
+            margin-top: 0.5rem;
+        ">
+            <div style="
+                font-family: 'DM Sans', sans-serif;
+                font-weight: 600;
+                color: {msg_color};
+                margin-bottom: 0.25rem;
+            ">{msg_icon} {msg_text.split('!')[0] if '!' in msg_text else msg_text.split('.')[0]}</div>
+            <div style="
+                font-family: 'DM Sans', sans-serif;
+                font-size: 0.9rem;
+                color: #4A4A4A;
+            ">{msg_text}</div>
+        </div>
+        """, unsafe_allow_html=True)
     
-    st.markdown("---")
+    st.markdown("<div style='height: 2rem;'></div>", unsafe_allow_html=True)
     
     # -------------------------------------------------------------------------
-    # Matched Skills
+    # Matched Skills - Styled badges
     # -------------------------------------------------------------------------
     matched = analysis.get("matched_skills", [])
-    st.markdown("### ✅ Matched Skills")
-    st.caption("Skills from the job description that appear in your resume.")
+    st.markdown("""
+    <div style="
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.25rem;
+        color: #1A1A1A;
+        margin-bottom: 0.5rem;
+    ">✓ Matched Skills</div>
+    <div style="
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.85rem;
+        color: #8B8680;
+        margin-bottom: 1rem;
+    ">Skills from the job description that appear in your resume</div>
+    """, unsafe_allow_html=True)
     
     if matched:
-        # Display as chips
-        matched_display = " ".join([f"`{skill}`" for skill in matched])
-        st.markdown(matched_display)
+        badges_html = "".join([f"""
+        <span style="
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(91, 138, 114, 0.1), rgba(91, 138, 114, 0.15));
+            border: 1px solid rgba(91, 138, 114, 0.3);
+            border-radius: 6px;
+            padding: 0.4rem 0.8rem;
+            margin: 0.2rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            color: #5B8A72;
+        ">{skill}</span>
+        """ for skill in matched])
+        st.markdown(f"<div>{badges_html}</div>", unsafe_allow_html=True)
     else:
         st.info("No direct skill matches found. Consider adding relevant skills to your resume.")
     
-    st.markdown("---")
+    st.markdown("<div style='height: 1.5rem;'></div>", unsafe_allow_html=True)
     
     # -------------------------------------------------------------------------
-    # Missing Skills
+    # Missing Skills - Styled with warning tone
     # -------------------------------------------------------------------------
     missing = analysis.get("missing_skills", [])
-    st.markdown("### ❌ Missing Skills")
-    st.caption("Skills from the job description not found in your resume. Only add skills you actually have.")
+    st.markdown("""
+    <div style="
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.25rem;
+        color: #1A1A1A;
+        margin-bottom: 0.5rem;
+    ">○ Missing Skills</div>
+    <div style="
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.85rem;
+        color: #8B8680;
+        margin-bottom: 1rem;
+    ">Skills from the job description not found in your resume</div>
+    """, unsafe_allow_html=True)
     
     if missing:
-        # Display as chips with warning color indication
-        missing_display = " ".join([f"`{skill}`" for skill in missing])
-        st.markdown(missing_display)
-        st.warning("⚠️ **Important:** Only add skills you genuinely possess. Do not add skills just to match the job description.")
+        badges_html = "".join([f"""
+        <span style="
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(184, 84, 80, 0.08), rgba(184, 84, 80, 0.12));
+            border: 1px solid rgba(184, 84, 80, 0.25);
+            border-radius: 6px;
+            padding: 0.4rem 0.8rem;
+            margin: 0.2rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+            color: #B85450;
+        ">{skill}</span>
+        """ for skill in missing])
+        st.markdown(f"<div>{badges_html}</div>", unsafe_allow_html=True)
+        
+        st.markdown("""
+        <div style="
+            background: rgba(201, 162, 39, 0.1);
+            border-left: 3px solid #C9A227;
+            border-radius: 0 8px 8px 0;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.875rem;
+            color: #4A4A4A;
+        ">
+            <strong>Important:</strong> Only add skills you genuinely possess. Do not add skills just to match the job description.
+        </div>
+        """, unsafe_allow_html=True)
     else:
         st.success("All identified skills from the JD are present in your resume!")
     
-    st.markdown("---")
+    st.markdown("<div style='height: 1.5rem;'></div>", unsafe_allow_html=True)
     
     # -------------------------------------------------------------------------
-    # Section Suggestions
+    # Section Suggestions - Styled cards
     # -------------------------------------------------------------------------
     suggestions = analysis.get("section_suggestions", [])
-    st.markdown("### 📝 Section Suggestions")
-    st.caption("Areas of your resume that could be improved for this job.")
+    st.markdown("""
+    <div style="
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.25rem;
+        color: #1A1A1A;
+        margin-bottom: 0.5rem;
+    ">📝 Section Suggestions</div>
+    <div style="
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.85rem;
+        color: #8B8680;
+        margin-bottom: 1rem;
+    ">Areas of your resume that could be improved for this job</div>
+    """, unsafe_allow_html=True)
     
     if suggestions:
         for sugg in suggestions:
@@ -1477,15 +2217,39 @@ def render_analysis_results(analysis: dict):
             section = sugg.get("section", "")
             suggestion_text = sugg.get("suggestion", "")
             
-            # Priority indicator
+            # Priority colors
             if priority == "high":
-                icon = "🔴"
+                border_color = "#B85450"
+                bg_color = "rgba(184, 84, 80, 0.05)"
             elif priority == "medium":
-                icon = "🟡"
+                border_color = "#C9A227"
+                bg_color = "rgba(201, 162, 39, 0.05)"
             else:
-                icon = "🟢"
+                border_color = "#5B8A72"
+                bg_color = "rgba(91, 138, 114, 0.05)"
             
-            st.markdown(f"{icon} **{section}:** {suggestion_text}")
+            st.markdown(f"""
+            <div style="
+                background: {bg_color};
+                border-left: 3px solid {border_color};
+                border-radius: 0 8px 8px 0;
+                padding: 1rem;
+                margin-bottom: 0.75rem;
+            ">
+                <div style="
+                    font-family: 'DM Sans', sans-serif;
+                    font-weight: 600;
+                    font-size: 0.9rem;
+                    color: #2C2C2C;
+                    margin-bottom: 0.25rem;
+                ">{section}</div>
+                <div style="
+                    font-family: 'DM Sans', sans-serif;
+                    font-size: 0.875rem;
+                    color: #4A4A4A;
+                ">{suggestion_text}</div>
+            </div>
+            """, unsafe_allow_html=True)
     else:
         st.success("Your resume sections look complete!")
     
@@ -1503,18 +2267,52 @@ def render_analysis_results(analysis: dict):
     # -------------------------------------------------------------------------
     # Apply Optimization Button
     # -------------------------------------------------------------------------
-    st.markdown("---")
-    st.markdown("### 🚀 Apply Optimization")
-    st.caption("Run the tailoring pipeline to get specific suggestions for your resume.")
+    st.markdown("<div style='height: 2rem;'></div>", unsafe_allow_html=True)
+    
+    st.markdown("""
+    <div style="
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.25rem;
+        color: #1A1A1A;
+        margin-bottom: 0.5rem;
+    ">✨ Apply Optimization</div>
+    <div style="
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.85rem;
+        color: #8B8680;
+        margin-bottom: 1rem;
+    ">Run the tailoring pipeline to get specific suggestions for your resume</div>
+    """, unsafe_allow_html=True)
     
     # Show warning before applying
-    st.warning("""
-    **Before you proceed:**
-    - This will analyze your resume against the job description
-    - You'll see specific suggestions for each section
-    - Nothing is changed until you accept individual suggestions
-    - You can always revert to your original resume
-    """)
+    st.markdown("""
+    <div style="
+        background: rgba(196, 149, 106, 0.1);
+        border: 1px solid #E8D5C4;
+        border-radius: 10px;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+    ">
+        <div style="
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            color: #2C2C2C;
+            margin-bottom: 0.5rem;
+        ">Before you proceed:</div>
+        <ul style="
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9rem;
+            color: #4A4A4A;
+            margin: 0;
+            padding-left: 1.25rem;
+        ">
+            <li>This will analyze your resume against the job description</li>
+            <li>You'll see specific suggestions for each section</li>
+            <li>Nothing is changed until you accept individual suggestions</li>
+            <li>You can always revert to your original resume</li>
+        </ul>
+    </div>
+    """, unsafe_allow_html=True)
     
     # Check if we have enough resume data to optimize
     has_content = (
@@ -2315,6 +3113,9 @@ def render_section_nav(next_section: Optional[str], prev_section: Optional[str] 
 
 def main():
     """Main application entry point."""
+    
+    # Inject custom CSS for distinctive visual identity
+    inject_custom_css()
     
     # Initialize session state
     init_session_state()
